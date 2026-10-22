@@ -1,0 +1,917 @@
+/* =========================================================================
+   LE CADENAS DU CŒUR — ÉNIGME DU CHAPITRE 0
+   Fidèle à la maquette : Verre dépoli, Ornements dorés, Cadenas 3D animé
+   ========================================================================= */
+
+.heartlock-stage {
+  --hl-night: #0b1030;
+  --hl-violet: #241b4b;
+  --hl-gold: #ffd97a;
+  --hl-gold-bright: #fff3c4;
+  --hl-parchment: #f7eed7;
+  --hl-parchment-ink: #2b1f3d;
+  --hl-ruby: #a51028;
+  --hl-green: #65e6a2;
+  --hl-glow-gold: 0 0 20px rgba(255, 217, 122, 0.6), 0 0 45px rgba(255, 217, 122, 0.3);
+  --hl-glow-green: 0 0 25px rgba(101, 230, 162, 0.7), 0 0 50px rgba(101, 230, 162, 0.4);
+
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 14px 12px 24px;
+  box-sizing: border-box;
+  font-family: "Andika", "Segoe UI", sans-serif;
+  user-select: none;
+  background-color: var(--hl-night);
+}
+
+@media (min-width: 768px) {
+  .heartlock-stage {
+    padding: 20px 24px 36px;
+    justify-content: center;
+  }
+}
+
+/* Arrière-plan romantique (Terrasse, Château illuminé, Lac) */
+.heartlock-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.heartlock-backdrop-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  /* Voile d'ambiance nocturne sans flou global pour conserver la netteté du château */
+  background: radial-gradient(ellipse at center, rgba(11, 16, 48, 0.3) 0%, rgba(11, 16, 48, 0.75) 100%);
+  pointer-events: none;
+}
+
+/* Particules & Étoiles de fond */
+.heartlock-fx-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hl-twinkle-star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 8px #ffd97a;
+  animation: hlTwinkle 2.8s ease-in-out infinite;
+}
+
+@keyframes hlTwinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.hl-floating-petal {
+  position: absolute;
+  top: -24px;
+  border-radius: 60% 0 60% 0;
+  background: rgba(255, 143, 184, 0.8);
+  box-shadow: 0 0 8px rgba(255, 105, 180, 0.4);
+  animation: hlPetalFall linear infinite;
+}
+
+@keyframes hlPetalFall {
+  0% { transform: translate(0, -10vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.9; }
+  100% { transform: translate(-25vw, 110vh) rotate(540deg); opacity: 0; }
+}
+
+/* Barre Supérieure du Jeu */
+.heartlock-topbar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1100px;
+  margin-bottom: 12px;
+}
+
+.hl-btn-circle {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--hl-gold);
+  background: rgba(23, 18, 43, 0.85);
+  color: var(--hl-gold);
+  box-shadow: var(--hl-glow-gold);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+  padding: 0;
+}
+.hl-btn-circle:hover {
+  transform: scale(1.08);
+  background: rgba(36, 27, 75, 0.95);
+}
+
+.hl-top-medallion {
+  position: relative;
+  border-radius: 9999px;
+  border: 1.5px solid var(--hl-gold);
+  background: rgba(11, 16, 48, 0.92);
+  padding: 6px 28px;
+  text-align: center;
+  box-shadow: var(--hl-glow-gold);
+}
+.hl-medallion-heart {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--hl-gold);
+  font-size: 14px;
+}
+.hl-medallion-line1 {
+  font-family: "Cinzel", serif;
+  font-size: 12px;
+  color: var(--hl-gold);
+  letter-spacing: 0.05em;
+  display: block;
+}
+.hl-medallion-line2 {
+  font-family: "Great Vibes", "Dancing Script", cursive;
+  font-size: 20px;
+  color: #fff8e7;
+  display: block;
+  line-height: 1.1;
+  text-shadow: 0 0 10px rgba(255, 217, 122, 0.5);
+}
+
+.hl-btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 9999px;
+  border: 1.5px solid var(--hl-gold);
+  background: rgba(23, 18, 43, 0.85);
+  color: var(--hl-gold);
+  padding: 8px 18px;
+  font-family: "Cinzel", serif;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: var(--hl-glow-gold);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.hl-btn-pill:hover {
+  transform: scale(1.05);
+}
+
+/* =========================================================================
+   PANNEAU CENTRAL EN VERRE DÉPOLI
+   ========================================================================= */
+.heartlock-panel {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 980px;
+  border-radius: 28px;
+  background: rgba(11, 16, 48, 0.85);
+  border: 2px solid var(--hl-gold);
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(255, 217, 122, 0.12), var(--hl-glow-gold);
+  backdrop-filter: blur(16px);
+  padding: 20px 16px 24px;
+  color: #fff6d6;
+  box-sizing: border-box;
+  animation: hlPanelIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@media (min-width: 768px) {
+  .heartlock-panel {
+    padding: 24px 32px 30px;
+    border-radius: 36px;
+  }
+}
+
+@keyframes hlPanelIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Ornements d'angle ❦ */
+.hl-corner {
+  position: absolute;
+  color: var(--hl-gold);
+  font-size: 24px;
+  filter: drop-shadow(0 0 4px var(--hl-gold));
+  line-height: 1;
+  pointer-events: none;
+}
+.hl-corner.tl { top: 12px; left: 16px; }
+.hl-corner.tr { top: 12px; right: 16px; transform: scaleX(-1); }
+.hl-corner.bl { bottom: 12px; left: 16px; transform: scaleY(-1); }
+.hl-corner.br { bottom: 12px; right: 16px; transform: scale(-1); }
+
+/* En-tête du Panneau */
+.hl-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.hl-header-center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 auto;
+}
+
+.hl-badge-enigme {
+  border-radius: 9999px;
+  border: 1.5px solid var(--hl-gold);
+  background: rgba(36, 27, 75, 0.9);
+  padding: 4px 14px;
+  font-family: "Cinzel", serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--hl-gold);
+  box-shadow: 0 0 12px rgba(255, 217, 122, 0.35);
+}
+
+.hl-title-text {
+  margin: 0;
+  font-family: "Cinzel", "Cormorant Garamond", serif;
+  font-size: clamp(20px, 4vw, 30px);
+  font-weight: 700;
+  color: #fff8e7;
+  text-shadow: 0 0 12px rgba(255, 217, 122, 0.6);
+}
+
+.hl-close-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--hl-gold);
+  font-size: 26px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.hl-close-btn:hover:not(:disabled) {
+  transform: translateY(-50%) scale(1.2);
+  color: #fff;
+}
+.hl-close-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* =========================================================================
+   ZONE CUPIDON & BULLE DE PARCHEMIN
+   ========================================================================= */
+.hl-cupid-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.hl-cupid-avatar-wrap {
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+  position: relative;
+}
+@media (min-width: 640px) {
+  .hl-cupid-avatar-wrap {
+    width: 110px;
+    height: 110px;
+  }
+}
+
+.hl-cupid-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px rgba(255, 217, 122, 0.6));
+  animation: hlCupidFloat 4s ease-in-out infinite;
+}
+
+.hl-cupid-shake {
+  animation: hlCupidRummage 0.6s ease-in-out !important;
+}
+
+@keyframes hlCupidFloat {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+@keyframes hlCupidRummage {
+  0%, 100% { transform: rotate(0); }
+  20% { transform: rotate(-10deg) translateX(-8px); }
+  40% { transform: rotate(10deg) translateX(8px); }
+  60% { transform: rotate(-6deg); }
+  80% { transform: rotate(6deg); }
+}
+
+.hl-speech-bubble {
+  flex: 1;
+  max-width: 680px;
+  background: radial-gradient(ellipse at 30% 20%, #fffdf7, var(--hl-parchment) 80%);
+  border: 1.5px solid var(--hl-gold);
+  border-radius: 20px;
+  padding: 12px 18px;
+  color: var(--hl-parchment-ink);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 217, 122, 0.25);
+  font-family: "Andika", "Segoe UI", sans-serif;
+  font-size: 13.5px;
+  line-height: 1.45;
+  box-sizing: border-box;
+}
+@media (min-width: 640px) {
+  .hl-speech-bubble {
+    padding: 14px 22px;
+    font-size: 15px;
+  }
+}
+
+.hl-speech-bubble p {
+  margin: 0;
+}
+.hl-speech-bubble p + p {
+  margin-top: 6px;
+  font-style: italic;
+  color: #5c1827;
+}
+
+/* =========================================================================
+   LE CADENAS DORÉ AU CENTRE (3D SVG AVEC ANNEAU & REFLETS)
+   ========================================================================= */
+.hl-lock-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 4px 0 16px;
+}
+
+.hl-lock-wrapper {
+  position: relative;
+  width: 170px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease;
+}
+@media (min-width: 640px) {
+  .hl-lock-wrapper {
+    width: 200px;
+    height: 210px;
+  }
+}
+
+/* Halo rayonnant & cercle magique */
+.hl-lock-magic-ring {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 217, 122, 0.45);
+  box-shadow: 0 0 30px rgba(255, 217, 122, 0.35);
+  pointer-events: none;
+  animation: hlRingSpin 24s linear infinite;
+}
+@keyframes hlRingSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hl-lock-sunburst {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 217, 122, 0.45) 0%, rgba(255, 217, 122, 0.1) 45%, transparent 70%);
+  filter: blur(14px);
+  pointer-events: none;
+  animation: hlSunburstPulse 3.5s ease-in-out infinite;
+}
+@keyframes hlSunburstPulse {
+  0%, 100% { transform: scale(0.92); opacity: 0.7; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+/* Petits cœurs lumineux flottants */
+.hl-orbit-heart {
+  position: absolute;
+  color: #ff8fb8;
+  font-size: 14px;
+  pointer-events: none;
+  animation: hlOrbitFloat 3s ease-in-out infinite;
+}
+@keyframes hlOrbitFloat {
+  0%, 100% { transform: translateY(0) scale(0.9); opacity: 0.6; }
+  50% { transform: translateY(-10px) scale(1.2); opacity: 1; }
+}
+
+/* L'élément SVG Cadenas */
+.hl-svg-lock {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 15px rgba(255, 217, 122, 0.5));
+  animation: hlLockBreathe 4s ease-in-out infinite;
+}
+
+@keyframes hlLockBreathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-4px) scale(1.02); }
+}
+
+/* L'Anse (Shackle) métallique */
+.hl-shackle-path {
+  transform-origin: 32px 55px;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hl-shackle-open {
+  transform: translateY(-24px) rotate(-38deg) !important;
+}
+
+/* Trou de serrure */
+.hl-keyhole {
+  transition: filter 0.4s ease, fill 0.4s ease;
+}
+.hl-keyhole-glow {
+  filter: drop-shadow(0 0 12px #fff) drop-shadow(0 0 24px var(--hl-gold));
+  fill: #fff !important;
+}
+
+/* Onde de choc lumineuse */
+.hl-shockwave {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 0 35px var(--hl-gold), inset 0 0 25px #fff;
+  pointer-events: none;
+  animation: hlShockwaveBlast 1s ease-out forwards;
+}
+@keyframes hlShockwaveBlast {
+  0% { transform: scale(0.3); opacity: 1; }
+  100% { transform: scale(6); opacity: 0; }
+}
+
+/* =========================================================================
+   LES TROIS ROUAGES (DIALS)
+   ========================================================================= */
+.heartlock-dials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+@media (min-width: 768px) {
+  .heartlock-dials-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+.hl-dial-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(14, 20, 56, 0.82);
+  border: 1.5px solid rgba(255, 217, 122, 0.55);
+  border-radius: 20px;
+  padding: 14px 12px 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 217, 122, 0.08);
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.hl-dial-card.correct-glow {
+  border-color: var(--hl-green) !important;
+  box-shadow: var(--hl-glow-green), inset 0 0 25px rgba(101, 230, 162, 0.25) !important;
+}
+
+.hl-dial-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Cinzel", serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--hl-gold);
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.hl-dial-riddle {
+  margin: 0 0 12px;
+  font-style: italic;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: #f7eed7;
+  text-align: center;
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Le Cadran / Boîte du Chiffre */
+.hl-counter-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.hl-arrow-btn {
+  width: 44px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: rgba(36, 27, 75, 0.85);
+  border: 1.5px solid var(--hl-gold);
+  border-radius: 10px;
+  color: var(--hl-gold);
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  padding: 0;
+}
+.hl-arrow-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+  background: rgba(255, 217, 122, 0.25);
+  box-shadow: 0 0 10px rgba(255, 217, 122, 0.5);
+}
+.hl-arrow-btn:active:not(:disabled) {
+  transform: scale(0.92);
+}
+.hl-arrow-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.hl-digit-screen {
+  position: relative;
+  width: 72px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: radial-gradient(circle at 50% 30%, #1e153b, #0c091f);
+  border: 2px solid var(--hl-gold);
+  box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.8), 0 0 14px rgba(255, 217, 122, 0.35);
+  overflow: hidden;
+}
+
+.hl-digit-number {
+  font-family: "Cinzel", "Playball", serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--hl-gold-bright);
+  text-shadow: 0 0 12px rgba(255, 217, 122, 0.8);
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hl-digit-screen.correct .hl-digit-number {
+  color: var(--hl-green) !important;
+  text-shadow: 0 0 16px var(--hl-green) !important;
+}
+
+/* Filet de lumière dorée vers le cadenas en Phase 1 */
+.hl-energy-beam {
+  position: absolute;
+  top: -24px;
+  width: 4px;
+  height: 30px;
+  background: linear-gradient(to top, var(--hl-green), var(--hl-gold));
+  border-radius: 9999px;
+  box-shadow: 0 0 12px var(--hl-gold);
+  animation: hlBeamUp 0.6s ease-out forwards;
+}
+@keyframes hlBeamUp {
+  0% { transform: scaleY(0); opacity: 0; }
+  50% { transform: scaleY(1); opacity: 1; }
+  100% { transform: translateY(-30px); opacity: 0; }
+}
+
+/* =========================================================================
+   ZONE INFÉRIEURE : INDICES & BOUTON D'OUVERTURE
+   ========================================================================= */
+.heartlock-bottom-row {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+}
+@media (min-width: 640px) {
+  .heartlock-bottom-row {
+    flex-direction: row;
+  }
+}
+
+.hl-hint-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(255, 217, 122, 0.6);
+  background: rgba(14, 20, 56, 0.85);
+  color: var(--hl-gold);
+  padding: 8px 18px;
+  font-family: "Cinzel", serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.hl-hint-btn:hover:not(:disabled) {
+  transform: scale(1.05);
+  background: rgba(255, 217, 122, 0.15);
+}
+
+.hl-validate-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 9999px;
+  padding: 12px 32px;
+  font-family: "Cinzel", "Playball", serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #2b1f3d;
+  background: linear-gradient(180deg, #ffe082 0%, #f5b041 50%, #d48b15 100%);
+  border: 2px solid #fff6d6;
+  box-shadow: 0 0 25px rgba(245, 176, 65, 0.8), 0 6px 18px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+@media (min-width: 640px) {
+  .hl-validate-btn {
+    font-size: 19px;
+    padding: 14px 40px;
+  }
+}
+.hl-validate-btn:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 35px rgba(245, 176, 65, 1), 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+.hl-validate-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+.hl-validate-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* =========================================================================
+   PANNEAU DES INDICES PROGRESSIFS
+   ========================================================================= */
+.hl-hints-panel {
+  width: 100%;
+  margin-top: 14px;
+  border-radius: 16px;
+  background: rgba(14, 20, 56, 0.95);
+  border: 1.5px solid var(--hl-gold);
+  padding: 14px 18px;
+  box-sizing: border-box;
+  animation: hlFadeIn 0.3s ease both;
+}
+.hl-hint-item {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: #fff8e7;
+  padding: 4px 0;
+}
+.hl-hint-item + .hl-hint-item {
+  border-top: 1px dashed rgba(255, 217, 122, 0.25);
+  margin-top: 6px;
+  padding-top: 8px;
+}
+.hl-hint-lvl {
+  font-weight: 700;
+  color: var(--hl-gold);
+  margin-right: 6px;
+}
+
+/* Bulle d'Erreur Humoristique */
+.hl-error-bubble {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 16px;
+  background: rgba(94, 6, 20, 0.92);
+  border: 1.5px solid #ff5277;
+  padding: 10px 16px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.4;
+  box-shadow: 0 0 20px rgba(255, 82, 119, 0.45);
+  animation: hlErrorShake 0.5s ease both;
+}
+@keyframes hlErrorShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-4px); }
+}
+
+/* =========================================================================
+   PHASE 5 : LE PORTAIL DE L'UNIVERSITÉ DÉVERROUILLÉ
+   ========================================================================= */
+.hl-gate-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  border-radius: inherit;
+  background: rgba(11, 16, 48, 0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: hlFadeIn 0.8s ease both;
+}
+
+.hl-gate-svg {
+  width: 220px;
+  height: 160px;
+  filter: drop-shadow(0 0 25px rgba(255, 217, 122, 0.8));
+}
+
+.hl-gate-door-left {
+  transform-origin: 20px 80px;
+  animation: hlGateOpenLeft 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+.hl-gate-door-right {
+  transform-origin: 180px 80px;
+  animation: hlGateOpenRight 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+@keyframes hlGateOpenLeft {
+  to { transform: scaleX(0.15) skewY(8deg); opacity: 0.4; }
+}
+@keyframes hlGateOpenRight {
+  to { transform: scaleX(0.15) skewY(-8deg); opacity: 0.4; }
+}
+
+/* =========================================================================
+   PHASE 6 : BANNIÈRE DE VICTOIRE & RÉCOMPENSE
+   ========================================================================= */
+.hl-victory-card {
+  position: absolute;
+  inset: 12px;
+  z-index: 50;
+  border-radius: 28px;
+  background: radial-gradient(ellipse at 50% 30%, #fffdf7, #f7eed7 75%);
+  border: 3px solid var(--hl-gold);
+  box-shadow: 0 0 45px rgba(255, 217, 122, 0.9), 0 20px 50px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px 20px;
+  color: var(--hl-parchment-ink);
+  animation: hlVictoryPop 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  overflow-y: auto;
+}
+@media (min-width: 640px) {
+  .hl-victory-card {
+    inset: 20px;
+    padding: 32px 28px;
+  }
+}
+
+@keyframes hlVictoryPop {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.hl-victory-title {
+  margin: 0;
+  font-family: "Great Vibes", "Playball", cursive;
+  font-size: clamp(32px, 6vw, 46px);
+  color: #a51028;
+  text-shadow: 0 0 10px rgba(255, 217, 122, 0.5);
+}
+
+.hl-cupid-wing-arrow-scene {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 620px;
+  margin: 12px 0 16px;
+  text-align: left;
+}
+
+.hl-victory-cupid-img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  flex-shrink: 0;
+  animation: hlCupidJump 0.8s ease infinite alternate;
+}
+@keyframes hlCupidJump {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+
+.hl-cupid-victory-dialogue {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1.5px solid var(--hl-gold);
+  border-radius: 16px;
+  padding: 10px 16px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #2b1f3d;
+}
+
+.hl-reward-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 9999px;
+  background: rgba(36, 27, 75, 0.9);
+  border: 1.5px solid var(--hl-gold);
+  color: #fff1b8;
+  padding: 8px 24px;
+  font-family: "Cinzel", serif;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 0 18px rgba(255, 217, 122, 0.5);
+  margin-bottom: 18px;
+}
+
+.hl-continue-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 9999px;
+  padding: 14px 36px;
+  font-family: "Cinzel", "Playball", serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(180deg, #d32f2f, #a51028);
+  border: 2px solid var(--hl-gold);
+  box-shadow: 0 0 25px rgba(225, 29, 72, 0.6), 0 6px 18px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.hl-continue-btn:hover {
+  transform: scale(1.05);
+}
+
+@keyframes hlFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heartlock-panel,
+  .hl-svg-lock,
+  .hl-cupid-avatar-img,
+  .hl-twinkle-star,
+  .hl-floating-petal,
+  .hl-lock-magic-ring,
+  .hl-victory-card {
+    animation: none !important;
+  }
+}

@@ -9,7 +9,6 @@ interface EpiloguePromiseProps {
 
 export default function EpiloguePromise({
   onComplete,
-  onBackToMenu,
 }: EpiloguePromiseProps) {
   // État : 'envelope' -> 'letter_open' -> 'proposal' -> 'celebration' | 'cupidon_comic'
   const [step, setStep] = useState<

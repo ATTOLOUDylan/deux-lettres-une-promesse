@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { letters } from '../../lovegame/content/letters';
 import LetterModal from '../LetterModal';
-import { progressionStore, useProgression } from '../../lovegame/state/ProgressionStore';
+import { progressionStore } from '../../lovegame/state/ProgressionStore';
 import { HIDDEN_HEARTS, OPTIONAL_MEMORIES, OptionalMemory } from '../../lovegame/content/collectibles';
 import MemoryModal from '../modals/MemoryModal';
 import LibraryCatModal from '../modals/LibraryCatModal';
@@ -18,7 +18,6 @@ export default function EndingDashboard({
   const [activeLetter, setActiveLetter] = useState<number | null>(null);
   const [selectedMemory, setSelectedMemory] = useState<OptionalMemory | null>(null);
   const [showCatModal, setShowCatModal] = useState<boolean>(false);
-  const progression = useProgression();
 
   return (
     <div className="ending-dashboard-screen">

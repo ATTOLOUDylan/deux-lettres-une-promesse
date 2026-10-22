@@ -1,0 +1,447 @@
+/* =========================================================================
+   ÉCRAN TITRE (ADAPTATION EXACTE DE PROJET/PROJET)
+   ========================================================================= */
+
+.title-scene {
+  --night: #0b1030;
+  --violet: #241b4b;
+  --parchment: #f7eed7;
+  --parchment-ink: #25164b;
+  --gold: #ffd97a;
+  --ruby: #a51028;
+  --warm-white: #fff8e7;
+  --rose: #e11d48;
+  --glow-gold: 0 0 18px rgba(255, 217, 122, 0.7), 0 0 48px rgba(255, 217, 122, 0.35);
+
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  color: var(--warm-white);
+  padding: 4rem 1rem 3rem;
+  z-index: 50;
+  box-sizing: border-box;
+  font-family: "Alegreya Sans", sans-serif;
+  user-select: none;
+}
+
+.title-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.title-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(11, 16, 48, 0.75) 100%);
+  pointer-events: none;
+}
+
+.title-tagline {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  z-index: 3;
+  font-family: "Playball", cursive;
+  font-size: 1.4rem;
+  color: var(--warm-white);
+  transform: rotate(-4deg);
+  text-shadow: var(--glow-gold);
+}
+
+.title-tagline span {
+  color: var(--gold);
+}
+
+@media (max-width: 640px) {
+  .title-tagline {
+    font-size: 1rem;
+    right: 1rem;
+    top: 1rem;
+  }
+}
+
+.title-layout {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1280px) {
+  .title-layout {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}
+
+/* Particules étincelles */
+.sparkles {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.sparkles span {
+  position: absolute;
+  bottom: -10px;
+  width: 4px;
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--gold);
+  box-shadow: var(--glow-gold);
+  animation: titleSparkleRise linear infinite;
+}
+
+@keyframes titleSparkleRise {
+  0% { transform: translateY(0); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translateY(-105vh) translateX(30px); opacity: 0; }
+}
+
+/* Carte de Parchemin */
+.parchment {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  padding: 3.5rem clamp(1.25rem, 5vw, 3.5rem) 2.5rem;
+  color: var(--parchment-ink);
+  background: radial-gradient(ellipse at 50% 40%, var(--warm-white), var(--parchment) 60%, rgba(255, 217, 122, 0.18) 100%);
+  border: 2px solid var(--gold);
+  border-radius: 1.75rem;
+  box-shadow: var(--glow-gold), inset 0 0 60px rgba(255, 217, 122, 0.3), 0 30px 60px -20px var(--night);
+  animation: titleAppear 1.2s ease-out both;
+  box-sizing: border-box;
+}
+
+@keyframes titleAppear {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+.corner {
+  position: absolute;
+  color: var(--gold);
+  font-size: 2rem;
+  filter: drop-shadow(0 0 4px var(--gold));
+  line-height: 1;
+}
+
+.corner.tl { top: .6rem; left: .9rem; }
+.corner.tr { top: .6rem; right: .9rem; transform: scaleX(-1); }
+.corner.bl { bottom: .6rem; left: .9rem; transform: scaleY(-1); }
+.corner.br { bottom: .6rem; right: .9rem; transform: scale(-1); }
+
+.wax-seal {
+  position: absolute;
+  top: -2.1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 9999px;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 35% 30%, #e0405a, var(--ruby) 55%, #5e0614);
+  border: 3px solid var(--gold);
+  box-shadow: var(--glow-gold);
+  color: var(--gold);
+  font-size: 1.8rem;
+}
+
+.parchment-title {
+  font-family: "Playball", cursive;
+  text-align: center;
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  line-height: 1.05;
+  color: var(--night);
+  margin: 0;
+}
+
+.parchment-names {
+  text-align: center;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+  font-size: clamp(1.05rem, 3vw, 1.35rem);
+  margin-top: .5rem;
+  margin-bottom: 0;
+  color: var(--violet);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  justify-content: center;
+  color: var(--ruby);
+  margin: .9rem auto;
+  max-width: 18rem;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.parchment-prose {
+  font-size: clamp(0.98rem, 2.4vw, 1.08rem);
+  line-height: 1.6;
+}
+
+.parchment-prose h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--night);
+  margin-bottom: .4rem;
+  margin-top: 0;
+}
+
+.parchment-prose p {
+  margin-bottom: .85rem;
+}
+
+.parchment-prose strong {
+  color: var(--night);
+}
+
+.parchment-prose .poetic {
+  text-align: center;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.25rem;
+  margin-top: 1rem;
+}
+
+/* Bouton Royal */
+.btn-royal {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+  padding: 1rem 2.25rem;
+  border-radius: 9999px;
+  font-family: "Playball", cursive;
+  font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+  color: var(--gold);
+  background: linear-gradient(180deg, var(--violet), var(--night));
+  border: 2px solid var(--gold);
+  box-shadow: var(--glow-gold);
+  animation: titleAura 2.8s ease-in-out infinite;
+  transition: transform .2s, filter .2s;
+  cursor: pointer;
+}
+
+.btn-royal:hover {
+  transform: translateY(-2px) scale(1.03);
+  filter: brightness(1.15);
+}
+
+.btn-royal:active {
+  transform: scale(.96);
+}
+
+.btn-royal:disabled {
+  cursor: wait;
+  opacity: .85;
+}
+
+@keyframes titleAura {
+  0%, 100% { box-shadow: var(--glow-gold); }
+  50% { box-shadow: 0 0 28px var(--gold), 0 0 70px rgba(255, 217, 122, 0.45); }
+}
+
+.btn-drawer {
+  padding: .5rem 1.25rem;
+  border-radius: 9999px;
+  font-size: .9rem;
+  color: var(--warm-white);
+  background: rgba(11, 16, 48, 0.85);
+  border: 1px solid rgba(255, 217, 122, 0.5);
+  transition: filter .2s;
+  cursor: pointer;
+}
+
+.btn-drawer:hover {
+  filter: brightness(1.3);
+}
+
+.btn-danger {
+  padding: .5rem 1.25rem;
+  border-radius: 9999px;
+  color: var(--warm-white);
+  background: var(--ruby);
+  border: 1px solid var(--gold);
+  cursor: pointer;
+}
+
+/* Tiroir Journal */
+.journal {
+  width: 100%;
+  max-width: 380px;
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  color: var(--warm-white);
+  background: rgba(11, 16, 48, 0.94);
+  border: 1px solid var(--gold);
+  box-shadow: var(--glow-gold);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-block: 0;
+  transition: max-height .6s ease, opacity .4s ease, padding .4s;
+  box-sizing: border-box;
+}
+
+.journal.is-open {
+  max-height: 900px;
+  opacity: 1;
+  padding-block: 1.25rem;
+}
+
+@media (min-width: 1280px) {
+  .journal {
+    margin-top: 5rem;
+  }
+}
+
+.journal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 217, 122, 0.3);
+  padding-bottom: .75rem;
+}
+
+.journal-header h2 {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+}
+
+.journal-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--gold);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.journal-list {
+  list-style: none;
+  padding: 0;
+  margin: .5rem 0 0;
+}
+
+.journal-item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: .9rem;
+  padding: .7rem .25rem;
+  border: none;
+  border-bottom: 1px solid rgba(255, 217, 122, 0.15);
+  background: transparent;
+  transition: background .2s;
+  color: var(--warm-white);
+  cursor: pointer;
+}
+
+.journal-item:not(:disabled):hover {
+  background: rgba(255, 217, 122, 0.1);
+}
+
+.journal-item:disabled {
+  cursor: not-allowed;
+  opacity: .75;
+}
+
+.journal-icon {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 9999px;
+  background: rgba(36, 27, 75, 0.8);
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.journal-meter {
+  position: relative;
+  display: block;
+  height: 6px;
+  margin-top: .35rem;
+  border-radius: 9999px;
+  background: rgba(255, 248, 231, 0.15);
+}
+
+.journal-meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--gold);
+}
+
+.journal-meter em {
+  position: absolute;
+  right: 0;
+  top: -1.1rem;
+  font-size: .7rem;
+  color: var(--gold);
+  font-style: normal;
+}
+
+/* Boîte modale de confirmation */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(11, 16, 48, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.modal-card {
+  max-width: 420px;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 1.25rem;
+  background: var(--parchment);
+  color: var(--parchment-ink);
+  border: 2px solid var(--gold);
+  box-shadow: var(--glow-gold);
+}
+
+.modal-card h2 {
+  margin-top: 0;
+  font-family: "Cinzel", serif;
+  font-size: 1.75rem;
+  color: var(--night);
+}
+
+.modal-card p {
+  line-height: 1.5;
+  color: var(--parchment-ink);
+}

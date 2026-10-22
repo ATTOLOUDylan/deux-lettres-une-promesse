@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { PUZZLES, PuzzleDefinition } from '../../lovegame/content/puzzles';
+import { PUZZLES, PuzzleDefinition, CodeLockPuzzleDefinition } from '../../lovegame/content/puzzles';
 import { progressionStore, useProgression } from '../../lovegame/state/ProgressionStore';
 import { bus } from '../../lovegame/bus';
 import MultipleChoicePuzzle from './MultipleChoicePuzzle';
 import ChronologyPuzzle from './ChronologyPuzzle';
 import SequencePuzzle from './SequencePuzzle';
 import WordAssemblyPuzzle from './WordAssemblyPuzzle';
+import CodeLockPuzzle from './CodeLockPuzzle';
+import HeartLockPuzzle from './HeartLockPuzzle';
 
 interface PuzzleModalProps {
   puzzleId: string;
@@ -25,6 +27,33 @@ export default function PuzzleModal({ puzzleId, onClose }: PuzzleModalProps) {
   if (!puzzle) {
     return null;
   }
+
+  // ── Court-circuit : HeartLockPuzzle gère tout en interne ──────────────────
+  if (puzzleId === 'puzzle-heart-code' && puzzle.type === 'code_lock') {
+    const handleSuccessHL = () => {
+      const isNew = progressionStore.solvePuzzle(puzzle.id);
+      if (puzzle.fragmentReward) {
+        progressionStore.collectFragment(puzzle.fragmentReward);
+      }
+      if (isNew && puzzle.actionOnSuccess) {
+        progressionStore.setMissionStatus(puzzle.actionOnSuccess, 'completed');
+      }
+      bus.emit('puzzle-solved', { puzzleId: puzzle.id, newlySolved: isNew });
+    };
+    const handleCloseHL = () => {
+      bus.emit('puzzle-closed', puzzle.id);
+      onClose();
+    };
+    return (
+      <HeartLockPuzzle
+        puzzle={puzzle as CodeLockPuzzleDefinition}
+        onClose={handleCloseHL}
+        onSuccess={handleSuccessHL}
+        alreadySolved={alreadySolved}
+      />
+    );
+  }
+  // ─────────────────────────────────────────────────────────────────────────
 
   const handleSuccess = () => {
     const isNew = progressionStore.solvePuzzle(puzzle.id);
@@ -121,6 +150,14 @@ export default function PuzzleModal({ puzzleId, onClose }: PuzzleModalProps) {
 
           {puzzle.type === 'word_assembly' && (
             <WordAssemblyPuzzle
+              puzzle={puzzle}
+              onAttempt={handleAttempt}
+              isCompleted={solved}
+            />
+          )}
+
+          {puzzle.type === 'code_lock' && puzzle.id !== 'puzzle-heart-code' && (
+            <CodeLockPuzzle
               puzzle={puzzle}
               onAttempt={handleAttempt}
               isCompleted={solved}

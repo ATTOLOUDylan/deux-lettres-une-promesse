@@ -1,9 +1,11 @@
 export interface MapLocation {
   id: string;
+  number: number;
   name: string;
   subtitle: string;
   status: 'accessible' | 'locked' | 'completed';
   icon: string;
+  image: string;
   description: string;
 }
 
@@ -50,46 +52,54 @@ export const CHAPTER_0_CONTENT = {
       speaker: 'Cupidon le stagiaire',
       title: 'Guide officiel (en période d’essai)',
       avatar: '👼',
-      text: 'Avant de pouvoir ouvrir la première porte vers l’Université, Dylan m’a confié une petite formule secrète : le Code du Cœur ! C’est pour vérifier que c’est bien toi… Prête à relever le défi ?',
+      text: 'Avant de pouvoir ouvrir la première porte vers l’Université, Dylan a verrouillé le portail avec un cadenas doré en forme de cœur : le Cadenas du Cœur ! Trois rouages, trois devinettes… C’est pour vérifier que c’est bien toi. Prête à relever le défi ?',
     },
   },
   mapLocations: [
     {
       id: 'loc-universite',
+      number: 1,
       name: 'L’Université',
       subtitle: 'Chapitre 1 & 2',
       status: 'accessible',
       icon: '🏛️',
+      image: 'map/loc_universite.jpg',
       description: 'Là où tout a commencé : les regards timides dans la salle de classe, les premiers mots et le laboratoire des sentiments.',
     },
     {
       id: 'loc-jardin',
+      number: 2,
       name: 'Le Jardin Enchanté',
       subtitle: 'Chapitre 3',
       status: 'locked',
-      icon: '🌸',
+      icon: '✿',
+      image: 'map/loc_jardin.jpg',
       description: 'Une chasse aux fragments de phrase lumineuse (« TU ES MON PLUS BEAU HASARD ») au milieu des lucioles.',
     },
     {
       id: 'loc-pont',
+      number: 3,
       name: 'Le Pont des Étoiles',
       subtitle: 'Chapitre 4',
       status: 'locked',
-      icon: '✨',
+      icon: '★',
+      image: 'map/loc_pont.jpg',
       description: 'L’ascension sous les étoiles, les trois épreuves de la confiance et la découverte de la seconde lettre.',
     },
     {
       id: 'loc-retrouvailles',
+      number: 4,
       name: 'La Clairière & La Promesse',
       subtitle: 'Chapitre 5 & Épilogue',
       status: 'locked',
-      icon: '💖',
+      icon: '♥',
+      image: 'map/loc_clairiere.jpg',
       description: 'Le lieu secret où Dylan t’attend en personne pour te remettre sa promesse pour la vie.',
     },
   ] as MapLocation[],
   puzzleId: 'puzzle-heart-code',
   transition: {
-    congrats: 'Le Code du Cœur a fonctionné ! ✨',
+    congrats: 'Le Cadenas du Cœur s’est ouvert ! ✨',
     message: 'Le portail des souvenirs s’ouvre doucement devant toi… Direction l’Université !',
     buttonText: 'Entrer dans l’Université 🏛️',
   },

@@ -3,6 +3,7 @@ import { DIALOGUES, DialogueNode, DialogueOption } from '../lovegame/content/dia
 import { progressionStore, useProgression } from '../lovegame/state/ProgressionStore';
 import { duckMusic } from '../lovegame/audio';
 import { bus } from '../lovegame/bus';
+import { asset } from '../lovegame/assets';
 
 interface DialogueBoxProps {
   dialogueId: string;
@@ -136,7 +137,11 @@ export default function DialogueBox({ dialogueId, onClose }: DialogueBoxProps) {
         <div className="dialogue-header">
           {node.speaker.avatar && (
             <span className="dialogue-avatar" aria-hidden="true">
-              {node.speaker.avatar}
+              {node.speaker.avatar.includes('/') || node.speaker.avatar.includes('.') ? (
+                <img src={asset(node.speaker.avatar)} alt="" className="dialogue-avatar-img" />
+              ) : (
+                node.speaker.avatar
+              )}
             </span>
           )}
           <div className="dialogue-speaker-info">

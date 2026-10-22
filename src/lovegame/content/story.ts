@@ -28,7 +28,7 @@ Et crois-moi, j'ai beaucoup de choses à te dire.
 
 **Prête à découvrir notre histoire, ma poupée ?** ❤️`,
   startButton: 'Entrer dans notre histoire',
-  levelTitles: ['Le jardin enchanté', 'Le pont des étoiles'],
+  levelTitles: ['Le Laboratoire des Sentiments', 'Le pont des étoiles'],
   princeGreeting: 'Bienvenue, mon amour ❤\nSuis le chemin et ramasse les cœurs : ils réveilleront le coffre.',
   controlsHintDesktop: '← → ou A D : marcher   ·   Espace : sauter   ·   E : ouvrir le coffre',
   controlsHintTouch: 'Utilise les boutons pour marcher, sauter et ouvrir le coffre',

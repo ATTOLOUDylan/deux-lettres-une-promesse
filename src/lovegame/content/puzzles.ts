@@ -1,4 +1,4 @@
-export type PuzzleType = 'choice' | 'chronology' | 'sequence' | 'word_assembly';
+export type PuzzleType = 'choice' | 'chronology' | 'sequence' | 'word_assembly' | 'code_lock';
 
 export interface BasePuzzleDefinition {
   id: string;
@@ -56,50 +56,67 @@ export interface WordAssemblyPuzzleDefinition extends BasePuzzleDefinition {
   targetWords: string[]; // Ex: ['TU', 'ES', 'MON', 'PLUS', 'BEAU', 'HASARD']
 }
 
+// Rouage d'un cadenas : une devinette poétique dont la réponse est un chiffre
+export interface CodeLockDial {
+  id: string;
+  label: string; // Titre gravé sur le rouage (ex: « Le Rouage des Débuts »)
+  riddle: string; // La devinette gravée dans le métal
+}
+
+export interface CodeLockPuzzleDefinition extends BasePuzzleDefinition {
+  type: 'code_lock';
+  dials: CodeLockDial[]; // Les rouages, dans l'ordre
+  answer: string; // Code attendu, un chiffre par rouage (ex: '321')
+}
+
 export type PuzzleDefinition =
   | ChoicePuzzleDefinition
   | ChronologyPuzzleDefinition
   | SequencePuzzleDefinition
-  | WordAssemblyPuzzleDefinition;
+  | WordAssemblyPuzzleDefinition
+  | CodeLockPuzzleDefinition;
 
 export const PUZZLES: Record<string, PuzzleDefinition> = {
-  // --- ÉNIGME DE DÉMONSTRATION DU CHAPITRE 0 : Le code du cœur ---
+  // --- ÉNIGME DU CHAPITRE 0 : Le Cadenas du Cœur (3 rouages à déduire) ---
   'puzzle-heart-code': {
     id: 'puzzle-heart-code',
-    title: 'Le Code Secret du Cœur',
-    instruction: 'Cupidon le stagiaire a laissé une formule magique pour déverrouiller la suite :',
-    type: 'choice',
-    question: 'Sachant que ❤ = 2, ⭐ = 3 et 🌙 = 1, combien vaut : ❤ + ⭐ + 🌙 ?',
-    options: [
+    title: 'Le Cadenas du Cœur',
+    instruction:
+      'Dylan a verrouillé le portail de l’Université avec un cadenas doré en forme de cœur.\nTrois rouages, trois secrets gravés dans le métal. Écoute ton cœur, tourne les rouages… et devine.',
+    type: 'code_lock',
+    dials: [
       {
-        id: 'opt-5',
-        text: '5',
-        isCorrect: false,
-        feedback: 'Presque ! Mais Cupidon a recompté sur ses petits doigts ailés et il trouve un tout petit peu plus… 😂',
+        id: 'dial-debuts',
+        label: 'Le Rouage des Débuts',
+        riddle: '« un sourire… un regard… un premier mot »',
       },
       {
-        id: 'opt-6',
-        text: '6',
-        isCorrect: true,
-        feedback: 'Bravo ! Le compte est parfait, le cadenas du cœur s’illumine ! ✨',
+        id: 'dial-coeurs',
+        label: 'Le Rouage des Cœurs',
+        riddle: '« deux silhouettes, combien de cœurs battent ? »',
       },
       {
-        id: 'opt-7',
-        text: '7',
-        isCorrect: false,
-        feedback: 'Oula, trop d’amour dans ce calcul ! Tu as ajouté un bonus d’affection ! 🤣',
+        id: 'dial-unique',
+        label: 'Le Rouage de l’Unique',
+        riddle: '« combien de promesses pour la vie entière ? »',
       },
     ],
+    answer: '321',
     hints: [
-      'Prends chaque symbole séparément : le cœur vaut 2, l’étoile vaut 3, et la lune vaut 1.',
-      'Fais une addition pas à pas : 2 + 3 font 5, auquel tu ajoutes la valeur de la lune…',
+      'Réponds avec ton cœur. ❤️',
+      'Remonte le temps du plus grand au plus précieux.',
+      'Le premier rouage évoque les débuts de votre histoire, le deuxième vous réunit tous les deux, et le dernier représente l’unique promesse.',
     ],
     errorReactions: [
-      'Cupidon : « Non, non, non ! Réessaie, il n’y a aucun chrono, prends ton temps ! »',
-      'Cupidon : « Même moi qui suis stagiaire, je crois qu’il y a un petit pépin dans le calcul ! 👼 »',
+      '« Tu viens de coder “l’amour compliqué” ! 😂 »',
+      '« Même mon arc est plus précis que ça ! »',
+      '« Le cadenas te demande une preuve d’amour, pas un numéro au hasard ! »',
+      '« Aïe… mon instinct de Cupidon vient de prendre un coup. 😭 »',
+      '« On se rapproche… enfin, je crois. Ne me demande pas de vérifier ! »',
     ],
-    successMessage: 'Le code magique 6 a déverrouillé le portail du cœur !',
-    rewardDescription: 'Clé d’accès au voyage romantique',
+    successMessage:
+      '« Clic… 3… clic… 2… clic… 1… Un silence. Puis : “3… 2… 1… JE T’AIME !! 💘” »\n(Cupidon tente de tirer une flèche, mais elle se plante dans son aile !)\n« Aïe ! Tout va bien ! C’était… une démonstration professionnelle. 😅 »',
+    rewardDescription: '🗝️ Clé d’accès au voyage romantique',
     actionOnSuccess: 'heart_code_solved',
   },
 

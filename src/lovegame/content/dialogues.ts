@@ -34,7 +34,7 @@ export const DIALOGUES: DialoguesMap = {
       name: 'Cupidon le stagiaire',
       title: 'Guide officiel (en période d’essai)',
       color: '#ff8fb8',
-      avatar: '👼',
+      avatar: 'characters/cupidon.jpg',
     },
     text: 'Bonjour mademoiselle ! Je suis Cupidon le stagiaire, responsable officiel de cette mission sentimentale ! J’ai un diplôme en amour, un master en bisous et… attends…',
     next: 'cupidon-ch0-intro-2',
@@ -45,7 +45,7 @@ export const DIALOGUES: DialoguesMap = {
       name: 'Cupidon le stagiaire',
       title: 'Guide officiel (en période d’essai)',
       color: '#ff8fb8',
-      avatar: '👼',
+      avatar: 'characters/cupidon.jpg',
     },
     text: '(Il fouille frénétiquement dans sa sacoche ailée) Mince. J’ai oublié le dossier officiel ! Bon, pas de panique, on va improviser avec élégance !',
     options: [
@@ -65,7 +65,7 @@ export const DIALOGUES: DialoguesMap = {
       name: 'Cupidon le stagiaire',
       title: 'Guide officiel (en période d’essai)',
       color: '#ff8fb8',
-      avatar: '👼',
+      avatar: 'characters/cupidon.jpg',
     },
     text: 'Hé ! Je suis très compétent quand je m’applique ! Et puis Dylan a tout préparé pour toi avec son cœur. Regarde, j’ai quand même réussi à sauver la carte de votre aventure !',
     options: [
@@ -81,7 +81,7 @@ export const DIALOGUES: DialoguesMap = {
       name: 'Cupidon le stagiaire',
       title: 'Guide officiel (en période d’essai)',
       color: '#ff8fb8',
-      avatar: '👼',
+      avatar: 'characters/cupidon.jpg',
     },
     text: 'Dylan t’a préparé un voyage à travers vos plus beaux souvenirs jusqu’à votre avenir. Regarde, j’ai sauvé la carte de votre aventure dans ma sacoche !',
     options: [
@@ -99,7 +99,7 @@ export const DIALOGUES: DialoguesMap = {
       name: 'Cupidon le stagiaire',
       title: 'Guide officiel (en période d’essai)',
       color: '#ff8fb8',
-      avatar: '👼',
+      avatar: 'characters/cupidon.jpg',
     },
     text: 'Bonjour mademoiselle ! Je suis Cupidon le stagiaire, responsable assermenté de votre voyage romantique ! J’ai un master en bisous, un diplôme en sentiments et… attends…',
     next: 'cupidon-jardin-intro-2',
@@ -110,7 +110,7 @@ export const DIALOGUES: DialoguesMap = {
       name: 'Cupidon le stagiaire',
       title: 'Guide officiel (en période d’essai)',
       color: '#ff8fb8',
-      avatar: '👼',
+      avatar: 'characters/cupidon.jpg',
     },
     text: '(Il fouille frénétiquement dans sa sacoche) Mince… j’ai oublié le dossier officiel ! Bon, pas d’inquiétude, on va improviser avec élégance !',
     options: [
@@ -134,9 +134,9 @@ export const DIALOGUES: DialoguesMap = {
       name: 'Cupidon le stagiaire',
       title: 'Guide officiel (en période d’essai)',
       color: '#ff8fb8',
-      avatar: '👼',
+      avatar: 'characters/cupidon.jpg',
     },
-    text: 'Exactement ! Dylan m’a confié « Le Code Secret du Cœur ». C’est une formule qu’il a préparée spécialement pour toi. Prête à tenter ta chance ?',
+    text: 'Exactement ! Dylan m’a confié « Le Cadenas du Cœur ». Trois rouages gravés de devinettes… écoute ton cœur et devine le code secret ! Prête à tenter ta chance ?',
     options: [
       {
         text: 'Oui ! Ouvrir l’énigme du cœur ✨',
@@ -154,7 +154,7 @@ export const DIALOGUES: DialoguesMap = {
       name: 'Cupidon le stagiaire',
       title: 'Guide officiel (en période d’essai)',
       color: '#ff8fb8',
-      avatar: '👼',
+      avatar: 'characters/cupidon.jpg',
     },
     text: 'Hé ! Un stagiaire très motivé, s’il vous plaît ! Et puis l’amour n’a pas besoin de protocole rigide. Dylan a préparé ce monde avec tout son cœur. Avancez et laissez-vous porter !',
     options: [
@@ -170,7 +170,7 @@ export const DIALOGUES: DialoguesMap = {
       name: 'Cupidon le stagiaire',
       title: 'Guide officiel (en période d’essai)',
       color: '#ff8fb8',
-      avatar: '👼',
+      avatar: 'characters/cupidon.jpg',
     },
     text: 'Votre mission est simple : suivez le sentier, ramassez les cœurs pour réveiller le coffre magique au bout du jardin. Une lettre très spéciale vous y attend !',
     options: [
@@ -187,7 +187,7 @@ export const DIALOGUES: DialoguesMap = {
     speaker: {
       name: 'L’Étudiante Curieuse',
       title: 'Observatrice du campus',
-      avatar: '👩‍🎓',
+      avatar: 'characters/npcs/student_girl.jpg',
       color: '#7bc4ff',
     },
     text: 'Tu cherches un garçon ? Ici ? Ma sœur, tu dois être plus précise ! Il y en a qui cherchent les cours, d’autres les notes… et certains cherchent clairement l’amour.',
@@ -207,21 +207,21 @@ export const DIALOGUES: DialoguesMap = {
     speaker: {
       name: 'L’Étudiante Curieuse',
       title: 'Observatrice du campus',
-      avatar: '👩‍🎓',
+      avatar: 'characters/npcs/student_girl.jpg',
       color: '#7bc4ff',
     },
-    text: 'Pour être sûre qu’on parle du même : dans quel endroit vous êtes-vous retrouvés seuls pour la première fois ?',
+    text: 'Dans quel endroit vous êtes-vous retrouvés seuls la première fois ?',
     options: [
       {
-        text: 'Dans la cour centrale de l’université',
+        text: 'Cour centrale',
         next: 'etudiante-curieuse-erreur',
       },
       {
-        text: 'À la bibliothèque universitaire',
+        text: 'Bibliothèque universitaire',
         next: 'etudiante-curieuse-erreur',
       },
       {
-        text: 'Dans une salle de cours déserte 🏫',
+        text: 'Salle de cours déserte',
         next: 'etudiante-curieuse-success',
       },
     ],
@@ -231,10 +231,10 @@ export const DIALOGUES: DialoguesMap = {
     speaker: {
       name: 'Cupidon le stagiaire',
       title: 'Guide officiel (en période d’essai)',
-      avatar: '👼',
+      avatar: 'characters/cupidon.jpg',
       color: '#ff8fb8',
     },
-    text: 'Hmm, pas tout à fait ! Dylan m’a confié qu’il n’y avait aucun prof ni aucun autre élève dans la pièce ce jour-là… Prends le temps de réfléchir, ma poupée !',
+    text: 'Il n\'y avait aucun prof ni aucun élève ce jour-là !',
     options: [
       {
         text: 'Laisse-moi rechoisir !',
@@ -247,10 +247,10 @@ export const DIALOGUES: DialoguesMap = {
     speaker: {
       name: 'L’Étudiante Curieuse',
       title: 'Observatrice du campus',
-      avatar: '👩‍🎓',
+      avatar: 'characters/npcs/student_girl.jpg',
       color: '#7bc4ff',
     },
-    text: 'Exactement ! Une salle de cours ! Je l’ai vu passer vers le fond du couloir tout à l’heure, l’air concentré et stressé comme s’il préparait un discours important !',
+    text: 'Je l’ai vu passer vers le fond du couloir, concentré et stressé comme s’il préparait un discours important.',
     options: [
       {
         text: 'Merci beaucoup ! Je vais vérifier là-bas ✨',
@@ -265,7 +265,7 @@ export const DIALOGUES: DialoguesMap = {
     speaker: {
       name: 'L’Étudiant Distrait',
       title: 'Spécialiste des pauses beignets',
-      avatar: '🍩',
+      avatar: 'characters/npcs/student_boy.jpg',
       color: '#ffd97a',
     },
     text: 'Oui, je vois de qui tu parles ! Enfin… je crois. Je confonds peut-être avec le gars qui vend des beignets. Quoique non, lui il n’avait pas de beignets dans les mains !',
@@ -281,21 +281,21 @@ export const DIALOGUES: DialoguesMap = {
     speaker: {
       name: 'L’Étudiant Distrait',
       title: 'Spécialiste des pauses beignets',
-      avatar: '🍩',
+      avatar: 'characters/npcs/student_boy.jpg',
       color: '#ffd97a',
     },
-    text: 'Il tenait un objet bien précis contre lui en marchant… attends, c’était quoi déjà ?',
+    text: 'Que tenait Dylan en marchant ?',
     options: [
       {
-        text: 'Un sachet de beignets chauds 🍩',
+        text: 'Sachet de beignets',
         next: 'etudiant-distrait-erreur',
       },
       {
-        text: 'Un carnet de notes et un stylo 📝 [À COMPLÉTER]',
+        text: 'Carnet de notes et stylo',
         next: 'etudiant-distrait-success',
       },
       {
-        text: 'Des écouteurs avec sa musique 🎧',
+        text: 'Écouteurs',
         next: 'etudiant-distrait-erreur',
       },
     ],
@@ -305,10 +305,10 @@ export const DIALOGUES: DialoguesMap = {
     speaker: {
       name: 'Cupidon le stagiaire',
       title: 'Guide officiel (en période d’essai)',
-      avatar: '👼',
+      avatar: 'characters/cupidon.jpg',
       color: '#ff8fb8',
     },
-    text: 'Haha non ! Ça c’est notre ami distrait qui a faim ! Dylan tenait quelque chose de studieux pour se donner une contenance ! 😂',
+    text: 'Haha non ! Ça c’est notre ami distrait qui a faim ! Dylan tenait quelque chose de studieux pour se donner une contenance !',
     options: [
       {
         text: 'Je choisis à nouveau !',
@@ -321,14 +321,76 @@ export const DIALOGUES: DialoguesMap = {
     speaker: {
       name: 'L’Étudiant Distrait',
       title: 'Spécialiste des pauses beignets',
-      avatar: '🍩',
+      avatar: 'characters/npcs/student_boy.jpg',
       color: '#ffd97a',
     },
-    text: 'Ah oui, c’est ça ! Il serrait son carnet de notes très fort et répétait quelque chose à voix basse en marchant vers la Salle C !',
+    text: 'Il serrait son carnet de notes très fort et répétait quelque chose à voix basse en marchant vers la Salle C.',
     options: [
       {
         text: 'Super indice, merci ! 📝',
         action: 'objet_distrait_trouve',
+      },
+    ],
+  },
+
+  // PNJ C : Le gardien — Logique de vérification stricte des indices
+  'gardien-refus-deux-indices': {
+    id: 'gardien-refus-deux-indices',
+    speaker: {
+      name: 'Le Gardien Bienveillant',
+      title: 'Détenteur des clés du bâtiment',
+      avatar: 'characters/npcs/campus_guard.jpg',
+      color: '#e5a8ff',
+    },
+    text: 'Bonjour jeune fille ! Vous cherchez Dylan ? Je ne peux pas confier la clé de la Salle C sans être certain de qui vous parlez. Il vous manque l’indice du LIEU et l’indice de l’OBJET. Interrogez l’Étudiante près du tableau d’affichage et l’Étudiant sur le banc, puis revenez me voir !',
+    options: [
+      {
+        text: 'D’accord, je vais explorer le couloir ! 🔍',
+      },
+    ],
+  },
+  'gardien-refus-lieu': {
+    id: 'gardien-refus-lieu',
+    speaker: {
+      name: 'Le Gardien Bienveillant',
+      title: 'Détenteur des clés du bâtiment',
+      avatar: 'characters/npcs/campus_guard.jpg',
+      color: '#e5a8ff',
+    },
+    text: 'Il vous manque encore l’indice du LIEU où vous vous êtes vus. Allez donc parler à l’Étudiante Curieuse près du tableau d’affichage !',
+    options: [
+      {
+        text: 'J’y cours tout de suite ! 🏃‍♀️',
+      },
+    ],
+  },
+  'gardien-refus-objet': {
+    id: 'gardien-refus-objet',
+    speaker: {
+      name: 'Le Gardien Bienveillant',
+      title: 'Détenteur des clés du bâtiment',
+      avatar: 'characters/npcs/campus_guard.jpg',
+      color: '#e5a8ff',
+    },
+    text: 'Pour me prouver que vous le connaissez vraiment : quel objet tenait-il pour se donner une contenance ? Allez interroger l’Étudiant Distrait assis sur son banc !',
+    options: [
+      {
+        text: 'Je vais lui demander immédiatement ! 📝',
+      },
+    ],
+  },
+  'gardien-deja-cle': {
+    id: 'gardien-deja-cle',
+    speaker: {
+      name: 'Le Gardien Bienveillant',
+      title: 'Détenteur des clés du bâtiment',
+      avatar: 'characters/npcs/campus_guard.jpg',
+      color: '#e5a8ff',
+    },
+    text: 'Tu as déjà la clé de la Salle C dans ta poche ! Dylan t’attend tout au bout du couloir. Place-toi devant la porte et entre le retrouver !',
+    options: [
+      {
+        text: 'Merci monsieur le Gardien ! ❤️',
       },
     ],
   },
@@ -339,7 +401,7 @@ export const DIALOGUES: DialoguesMap = {
     speaker: {
       name: 'Le Gardien Bienveillant',
       title: 'Détenteur des clés du bâtiment',
-      avatar: '🗝️',
+      avatar: 'characters/npcs/campus_guard.jpg',
       color: '#e5a8ff',
     },
     text: 'Ah ! Le jeune homme qui pose beaucoup de questions et qui passe parfois ici avec un air bizarre ?',
@@ -355,10 +417,10 @@ export const DIALOGUES: DialoguesMap = {
     speaker: {
       name: 'Le Gardien Bienveillant',
       title: 'Détenteur des clés du bâtiment',
-      avatar: '🗝️',
+      avatar: 'characters/npcs/campus_guard.jpg',
       color: '#e5a8ff',
     },
-    text: 'Bon, quand on est amoureux, on devient un peu bizarre. C’est presque scientifique. Tiens, prends cette clé de la Salle C. Il s’y est enfermé tout à l’heure pour rassembler son courage !',
+    text: 'Quand on est amoureux, on devient un peu bizarre. C\'est presque scientifique. Tiens, prends cette clé de la Salle C. Il s\'y est enfermé tout à l\'heure pour rassembler son courage !',
     options: [
       {
         text: 'Merci beaucoup monsieur ! 🗝️',
@@ -373,7 +435,7 @@ export const DIALOGUES: DialoguesMap = {
     speaker: {
       name: 'Dylan (Souvenir)',
       title: 'Ce jour-là, dans le couloir',
-      avatar: '👦',
+      avatar: 'characters/hero/dylan_portrait.jpg',
       color: '#ffd97a',
     },
     text: 'Bon… j’y vais. Non. Pas maintenant. Bon, si. Attends… Mes mains tremblent un peu là, non ? Si je vais lui parler maintenant, je vais avoir l’air bête… Allez Dylan, un peu de courage !',
@@ -384,7 +446,7 @@ export const DIALOGUES: DialoguesMap = {
     speaker: {
       name: 'Cupidon le stagiaire',
       title: 'Guide officiel (en période d’essai)',
-      avatar: '👼',
+      avatar: 'characters/cupidon.jpg',
       color: '#ff8fb8',
     },
     text: 'Courage, champion ! Tu ne vas pas négocier avec tes propres jambes toute la journée ! Elle est juste dans la salle, vas-y avant qu’elle ne parte ! 😂',
@@ -402,7 +464,7 @@ export const DIALOGUES: DialoguesMap = {
     speaker: {
       name: 'Dylan',
       title: 'Dans la salle de cours',
-      avatar: '👦',
+      avatar: 'characters/hero/dylan_portrait.jpg',
       color: '#ffd97a',
     },
     text: 'Salut… ça va ?',
@@ -426,7 +488,7 @@ export const DIALOGUES: DialoguesMap = {
     speaker: {
       name: 'Dylan',
       title: 'Dans la salle de cours',
-      avatar: '👦',
+      avatar: 'characters/hero/dylan_portrait.jpg',
       color: '#ffd97a',
     },
     text: 'En vrai, je voulais juste venir te parler depuis un moment… mais je ne savais pas trop comment faire. J’avais préparé plein de scénarios dans ma tête ! Mais ce jour-là, j’ai utilisé tout le courage que j’avais. Et je suis tellement content d’avoir osé. ❤️',

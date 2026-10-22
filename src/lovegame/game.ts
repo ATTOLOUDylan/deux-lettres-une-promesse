@@ -18,5 +18,6 @@ export function startGame(parent: string) {
     physics: { default: 'arcade', arcade: { gravity: { x: 0, y: 1800 }, debug: false } },
     scene: [PreloadScene, LevelScene, EndingScene],
   });
+  (window as any).phaserGame = game;
   return game;
 }

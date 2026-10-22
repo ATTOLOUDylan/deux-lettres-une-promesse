@@ -5,10 +5,12 @@ export interface UniversityNpc {
   name: string;
   role: string;
   avatar: string;
+  fullSprite?: string;
   color: string;
   dialogueId: string;
   missionKey: string;
   location: string;
+  x?: number;
 }
 
 export interface UniversityRoomConfig {
@@ -21,38 +23,66 @@ export interface UniversityRoomConfig {
   lockedReason: string;
   type: 'flashback' | 'puzzle' | 'encounter';
   puzzleId?: string;
+  x?: number;
 }
+
+// Configuration spatiale du couloir 2D scénarisé (de gauche à droite).
+// Ces positions servent maintenant de cibles pour la caméra.
+export const HALLWAY_CONFIG = {
+  worldWidth: 3300,
+  worldHeight: 720,
+  groundY: 652,
+  startX: 160,
+  noticeboardX: 430,
+  studentGirlX: 530,
+  doorAX: 960,
+  benchX: 1440,
+  studentBoyX: 1530,
+  catX: 1880,
+  doorBX: 2240,
+  guardX: 2640,
+  doorCX: 3040,
+  heart1X: 430,
+  heart2X: 2710,
+  memoryNoteX: 1400,
+};
 
 export const UNIVERSITY_NPCS: UniversityNpc[] = [
   {
     id: 'npc-etudiante',
     name: 'L’Étudiante Curieuse',
     role: 'Observatrice du campus',
-    avatar: '👩‍🎓',
+    avatar: 'characters/npcs/student_girl.jpg',
+    fullSprite: 'characters/npcs/student_girl_full.png',
     color: '#7bc4ff',
     dialogueId: 'etudiante-curieuse-intro',
     missionKey: 'indice_lieu_rencontre',
     location: 'Près du tableau d’affichage',
+    x: 530,
   },
   {
     id: 'npc-distrait',
     name: 'L’Étudiant Distrait',
     role: 'Spécialiste des pauses beignets',
-    avatar: '🍩',
+    avatar: 'characters/npcs/student_boy.jpg',
+    fullSprite: 'characters/npcs/student_boy_full.png',
     color: '#ffd97a',
     dialogueId: 'etudiant-distrait-intro',
     missionKey: 'objet_distrait_trouve',
     location: 'Assis sur le banc du couloir',
+    x: 1530,
   },
   {
     id: 'npc-gardien',
     name: 'Le Gardien Bienveillant',
     role: 'Détenteur des clés du bâtiment',
-    avatar: '🗝️',
+    avatar: 'characters/npcs/campus_guard.jpg',
+    fullSprite: 'characters/npcs/campus_guard_full.png',
     color: '#e5a8ff',
     dialogueId: 'gardien-intro',
     missionKey: 'cle_gardien_obtenue',
     location: 'À l’entrée des salles de cours',
+    x: 2640,
   },
 ];
 
@@ -66,6 +96,7 @@ export const UNIVERSITY_ROOMS: UniversityRoomConfig[] = [
     isUnlocked: () => true,
     lockedReason: '',
     type: 'flashback',
+    x: 960,
   },
   {
     id: 'salle-b',
@@ -77,6 +108,7 @@ export const UNIVERSITY_ROOMS: UniversityRoomConfig[] = [
     lockedReason: '',
     type: 'puzzle',
     puzzleId: 'puzzle-souvenirs-intro',
+    x: 2240,
   },
   {
     id: 'salle-c',
@@ -87,6 +119,7 @@ export const UNIVERSITY_ROOMS: UniversityRoomConfig[] = [
     isUnlocked: (state: ProgressionState) => !!state.missions['cle_gardien_obtenue'],
     lockedReason: 'La porte est verrouillée à double tour. Parle au Gardien pour obtenir la clé !',
     type: 'encounter',
+    x: 3040,
   },
 ];
 

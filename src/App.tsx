@@ -3,7 +3,6 @@ import { startGame } from './lovegame/game';
 import { bus } from './lovegame/bus';
 import { startMusic, setMusicEnabled } from './lovegame/audio';
 import { story } from './lovegame/content/story';
-import { asset } from './lovegame/assets';
 import LetterModal from './components/LetterModal';
 import TouchControls from './components/TouchControls';
 import DialogueBox from './components/DialogueBox';
@@ -13,40 +12,12 @@ import Chapter1University from './components/chapters/Chapter1University';
 import Chapter5Clearing from './components/chapters/Chapter5Clearing';
 import EpiloguePromise from './components/chapters/EpiloguePromise';
 import EndingDashboard from './components/chapters/EndingDashboard';
+import TitleScreen from './components/title/TitleScreen';
 import { progressionStore, useProgression } from './lovegame/state/ProgressionStore';
 import './lovegame/styles.css';
 
 type Phase = 'title' | 'chapter0' | 'chapter1' | 'playing' | 'chapter5' | 'epilogue' | 'ending';
 interface Hud { level: number; title: string; hearts: number; required: number; total: number }
-
-function renderFormattedText(text: string) {
-  return text.split('\n\n').map((paragraph, pIdx) => {
-    let p = paragraph.trim();
-    if (!p) return null;
-
-    let isHeader = false;
-    if (p.startsWith('# ')) {
-      isHeader = true;
-      p = p.slice(2);
-    }
-
-    const parts = p.split(/(\*\*.*?\*\*|\*.*?\*)/g);
-    const content = parts.map((part, partIdx) => {
-      if (part.startsWith('**') && part.endsWith('**')) {
-        return <strong key={partIdx}>{part.slice(2, -2)}</strong>;
-      }
-      if (part.startsWith('*') && part.endsWith('*')) {
-        return <em key={partIdx}>{part.slice(1, -1)}</em>;
-      }
-      return part;
-    });
-
-    if (isHeader) {
-      return <h2 key={pIdx} className="formatted-title">{content}</h2>;
-    }
-    return <p key={pIdx}>{content}</p>;
-  });
-}
 
 const isTouch = typeof window !== 'undefined' && (window.matchMedia?.('(pointer: coarse)').matches || 'ontouchstart' in window);
 
@@ -62,11 +33,6 @@ export default function App() {
   const fromGame = useRef(false);
   const toastTimer = useRef<number | undefined>(undefined);
   const progression = useProgression();
-  const hasSave =
-    progression.unlockedLetters.length > 0 ||
-    progression.solvedPuzzles.length > 0 ||
-    progression.collectedFragments.length > 0 ||
-    Object.keys(progression.openedChestsByLevel).length > 0;
 
   useEffect(() => {
     const onHud = (h: Hud) => setHud(h);
@@ -102,6 +68,19 @@ export default function App() {
     bus.on('start-dialogue', onStartDialogue);
     bus.on('start-puzzle', onStartPuzzle);
 
+    // Sécurité : Si on entre dans un chapitre scénarisé, on s'assure que le jeu global est en pause
+    const checkGameStatus = () => {
+      const globalGame = (window as any).phaserGame; // Si on l'a stocké là
+      if (globalGame) {
+        if (phase === 'chapter1' || phase === 'chapter0') {
+          globalGame.scene.scenes.forEach((s: any) => s.scene.pause());
+        } else if (phase === 'playing') {
+          globalGame.scene.scenes.forEach((s: any) => s.scene.resume());
+        }
+      }
+    };
+    checkGameStatus();
+
     return () => {
       bus.off('hud', onHud);
       bus.off('toast', onToast);
@@ -130,13 +109,6 @@ export default function App() {
     }
   };
 
-  const restart = () => {
-    progressionStore.reset();
-    setPhase('playing');
-    setHud(null);
-    bus.emit('restart');
-  };
-
   const toggleMusic = () => { setMusic(!music); setMusicEnabled(!music); };
 
   return (
@@ -144,125 +116,41 @@ export default function App() {
       <div id="game-container" />
 
       {phase === 'title' && (
-        <div className="title-screen" style={{ backgroundImage: `url(${asset('backgrounds/title.jpg')})` }}>
-          <div className="title-box">
-            <h1>{story.title}</h1>
-            <p className="names">{story.names}</p>
-            <div className="intro">{renderFormattedText(story.intro)}</div>
-            <div className="title-actions">
-              {progression.chapters['chapitre-0'] !== 'completed' ? (
-                <button
-                  className="primary"
-                  onClick={() => {
-                    startMusic();
-                    setPhase('chapter0');
-                  }}
-                >
-                  {story.startButton}
-                </button>
-              ) : progression.chapters['chapitre-1'] !== 'completed' ? (
-                <>
-                  <button
-                    className="primary"
-                    onClick={() => {
-                      startMusic();
-                      setPhase('chapter1');
-                    }}
-                  >
-                    Entrer dans l’Université (Chapitre 1) 🏛️
-                  </button>
-                  <button
-                    className="secondary"
-                    onClick={() => {
-                      startMusic();
-                      setPhase('chapter0');
-                    }}
-                  >
-                    📜 Revoir l’invitation & la carte
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button className="primary" onClick={begin}>
-                    Continuer notre aventure
-                  </button>
-                  <button
-                    className="secondary"
-                    onClick={() => {
-                      startMusic();
-                      setPhase('chapter1');
-                    }}
-                  >
-                    🏛️ Revoir l’Université (Chapitre 1)
-                  </button>
-                  <button
-                    className="secondary"
-                    onClick={() => {
-                      startMusic();
-                      setPhase('chapter0');
-                    }}
-                  >
-                    📜 Revoir l’invitation (Chapitre 0)
-                  </button>
-                  {progression.chapters['chapitre-5'] === 'completed' && (
-                    <>
-                      <button
-                        className="secondary"
-                        onClick={() => {
-                          startMusic();
-                          setPhase('chapter5');
-                        }}
-                      >
-                        🌸 Revoir les Retrouvailles (Chapitre 5)
-                      </button>
-                      <button
-                        className="secondary"
-                        onClick={() => {
-                          startMusic();
-                          setPhase('epilogue');
-                        }}
-                      >
-                        💌 Revoir la Promesse (Épilogue)
-                      </button>
-                      <button
-                        className="secondary"
-                        onClick={() => {
-                          startMusic();
-                          setPhase('ending');
-                        }}
-                      >
-                        🏆 Journal d’Amour & Écran Final
-                      </button>
-                    </>
-                  )}
-                </>
-              )}
-              {hasSave && progression.unlockedLetters.length > 0 && (
-                <button
-                  className="secondary"
-                  onClick={() => {
-                    fromGame.current = false;
-                    setLetter(progression.unlockedLetters[0] ?? 0);
-                  }}
-                >
-                  📖 Relire nos lettres & promesse ({progression.unlockedLetters.length}/3)
-                </button>
-              )}
-              {hasSave && (
-                <button
-                  className="secondary"
-                  onClick={() => {
-                    if (window.confirm('Veux-tu réinitialiser ta progression et recommencer depuis le début ?')) {
-                      progressionStore.reset();
-                    }
-                  }}
-                >
-                  ↺ Recommencer à zéro
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
+        <TitleScreen
+          onStartChapter0={() => {
+            startMusic();
+            setPhase('chapter0');
+          }}
+          onEnterUniversity={() => {
+            startMusic();
+            setPhase('chapter1');
+          }}
+          onContinue={begin}
+          onOpenLetter={(idx) => {
+            fromGame.current = false;
+            setLetter(idx);
+          }}
+          onReviewChapter0={() => {
+            startMusic();
+            setPhase('chapter0');
+          }}
+          onReviewChapter1={() => {
+            startMusic();
+            setPhase('chapter1');
+          }}
+          onReviewChapter5={() => {
+            startMusic();
+            setPhase('chapter5');
+          }}
+          onReviewEpilogue={() => {
+            startMusic();
+            setPhase('epilogue');
+          }}
+          onReviewEnding={() => {
+            startMusic();
+            setPhase('ending');
+          }}
+        />
       )}
 
       {phase === 'chapter0' && (
